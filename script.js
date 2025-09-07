@@ -215,6 +215,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Enrollment Form Type Selector
+document.addEventListener('DOMContentLoaded', () => {
+    const formTypeButtons = document.querySelectorAll('.form-type-btn');
+    const formContainers = document.querySelectorAll('.enrollment-form-container');
+    const enrollmentTitle = document.getElementById('enrollment-title');
+    const enrollmentDescription = document.getElementById('enrollment-description');
+
+    const adultContent = {
+        title: 'Get Started Today',
+        description: 'Fill out the enrollment form below to secure your spot and begin your personalized learning experience. Our enrollment process is quick and easy!'
+    };
+
+    const guardianContent = {
+        title: 'Enroll Your Child',
+        description: 'Complete the enrollment form to get your child started with personalized learning. We work with students ages 5-17 and provide a safe, nurturing environment.'
+    };
+
+    formTypeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const formType = button.getAttribute('data-form');
+            
+            // Remove active class from all buttons and containers
+            formTypeButtons.forEach(btn => btn.classList.remove('active'));
+            formContainers.forEach(container => container.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding container
+            button.classList.add('active');
+            document.getElementById(`${formType}-form`).classList.add('active');
+            
+            // Update content based on form type
+            if (formType === 'adult') {
+                enrollmentTitle.textContent = adultContent.title;
+                enrollmentDescription.textContent = adultContent.description;
+            } else if (formType === 'guardian') {
+                enrollmentTitle.textContent = guardianContent.title;
+                enrollmentDescription.textContent = guardianContent.description;
+            }
+        });
+    });
+});
+
 // Add CSS animations via JavaScript
 const style = document.createElement('style');
 style.textContent = `
